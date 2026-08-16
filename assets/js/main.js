@@ -31,8 +31,10 @@ function showStatus(type, message) {
   formStatus.textContent = message;
 }
 
+const dispatch = new PrairieDispatch("pk_86ab8a5e81b75ad9f360e85f0cca948062e2f850067c9230");
+
 if (contactForm) {
-  contactForm.addEventListener("submit", (event) => {
+  contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     if (!contactForm.checkValidity()) {
@@ -42,22 +44,26 @@ if (contactForm) {
     }
 
     const data = Object.fromEntries(new FormData(contactForm).entries());
-    const subject = encodeURIComponent(`Estimate request from ${data.name}`);
-    const body = encodeURIComponent(
-      [
-        `Name: ${data.name}`,
-        `Phone: ${data.phone}`,
-        `Email: ${data.email}`,
-        `Project Type: ${data.projectType}`,
-        `Timeline: ${data.timeline}`,
-        "",
-        "Project Details:",
-        data.message,
-      ].join("\n"),
-    );
+    const notes = [`Service: ${data.projectType}`, `Urgency: ${data.timeline}`, `Email: ${data.email}`, data.message]
+      .filter(Boolean)
+      .join(" — ");
 
-    showStatus("success", "Thanks. Your email app will open with the estimate request ready to send.");
-    window.location.href = `mailto:brentstowing@icloud.com?subject=${subject}&body=${body}`;
-    contactForm.reset();
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.disabled = true;
+
+    try {
+      await dispatch.send({
+        customerName: data.customerName,
+        phone: data.phone,
+        address: data.address,
+        notes,
+      });
+      showStatus("success", "Thanks. We've been notified and will call you back shortly.");
+      contactForm.reset();
+    } catch (err) {
+      showStatus("error", "Something went wrong sending your request. Please call us instead.");
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
   });
 }
