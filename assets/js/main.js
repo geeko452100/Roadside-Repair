@@ -57,7 +57,7 @@ if (contactForm) {
     );
 
     showStatus("success", "Thanks. Your email app will open with the estimate request ready to send.");
-    window.location.href = `mailto:estimates@acmedrywall.example?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:brentstowing@icloud.com?subject=${subject}&body=${body}`;
     contactForm.reset();
   });
 }

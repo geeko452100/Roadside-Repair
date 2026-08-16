@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://brentstowing.prairiewebstudio.com/sitemap.xml
