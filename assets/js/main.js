@@ -31,7 +31,9 @@ function showStatus(type, message) {
   formStatus.textContent = message;
 }
 
-const dispatch = new PrairieDispatch("pk_86ab8a5e81b75ad9f360e85f0cca948062e2f850067c9230");
+// The secret key lives server-side (functions/api/v1/dispatch.js) — this
+// just routes the SDK's POST to our own origin instead of the dispatch API.
+const dispatch = new PrairieDispatch("local-relay", { baseUrl: window.location.origin });
 
 if (contactForm) {
   contactForm.addEventListener("submit", async (event) => {
