@@ -49,17 +49,31 @@ if (contactForm) {
     const notes = [`Service: ${data.projectType}`, `Urgency: ${data.timeline}`, `Email: ${data.email}`, data.message]
       .filter(Boolean)
       .join(" — ");
+    const emergency = data.projectType === "Emergency towing" || data.timeline === "Emergency, need help now";
 
     const submitBtn = contactForm.querySelector('button[type="submit"]');
     if (submitBtn) submitBtn.disabled = true;
 
+    const payload = {
+      customerName: data.customerName,
+      phone: data.phone,
+      address: data.address,
+      notes,
+      emergency,
+    };
+
+    if (emergency) {
+      try {
+        const coords = await dispatch.getCurrentCoordinates();
+        payload.latitude = coords.latitude;
+        payload.longitude = coords.longitude;
+      } catch (geoErr) {
+        console.warn("PrairieDispatch: geolocation unavailable", geoErr.message);
+      }
+    }
+
     try {
-      await dispatch.send({
-        customerName: data.customerName,
-        phone: data.phone,
-        address: data.address,
-        notes,
-      });
+      await dispatch.send(payload);
       showStatus("success", "Thanks. We've been notified and will call you back shortly.");
       contactForm.reset();
     } catch (err) {
