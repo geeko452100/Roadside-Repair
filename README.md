@@ -1,6 +1,6 @@
-# Brent's Towing LLC
+# Acme Towing LLC
 
-Static marketing site for Brent's Towing LLC, a 24/7 emergency towing and roadside assistance company based in Great Bend, Kansas. It keeps a Tailwind CSS build setup available while committing a small production CSS file for fast first loads and strong Lighthouse scores.
+Static marketing site for Acme Towing LLC, a 24/7 emergency towing and roadside assistance company based in Great Bend, Kansas. It keeps a Tailwind CSS build setup available while committing a small production CSS file for fast first loads and strong Lighthouse scores.
 
 ## Files
 
@@ -12,7 +12,7 @@ Static marketing site for Brent's Towing LLC, a 24/7 emergency towing and roadsi
 
 ## Before launch — replace the placeholder domain
 
-The site doesn't have a live domain yet, so `https://brentstowing.prairiewebstudio.com/` is used as a placeholder in four places. Update all of them to the real production URL once it's known:
+The site doesn't have a live domain yet, so `https://acmetowing.prairiewebstudio.com/` is used as a placeholder in four places. Update all of them to the real production URL once it's known:
 
 - `index.html`: `<link rel="canonical">`, `og:url`, `og:image`, `twitter:image`
 - `robots.txt`: `Sitemap:` line
@@ -29,7 +29,7 @@ The site doesn't have a live domain yet, so `https://brentstowing.prairiewebstud
 
 Update the company name, phone number, email, service area, project photos, and copy in `index.html`. Keep the title, meta description, JSON-LD, and Open Graph tags in sync with any copy changes.
 
-The form currently opens the visitor's email app with a prefilled message addressed to `brentstowing@icloud.com`. For production, consider connecting the form to a service such as Formspree, Netlify Forms, or a custom backend endpoint so submissions don't depend on the visitor's device having an email client configured.
+The form currently opens the visitor's email app with a prefilled message addressed to `info@acmetowing.com`. For production, consider connecting the form to a service such as Formspree, Netlify Forms, or a custom backend endpoint so submissions don't depend on the visitor's device having an email client configured.
 
 ## Preview
 
