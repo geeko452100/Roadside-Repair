@@ -15,48 +15,32 @@ Multi-page static marketing site for **Acme Construction Co.**, a fictional gene
 
 ## Files
 
-- `assets/css/styles.css`: hand-written stylesheet shared by every page. Design tokens (colors, fonts) are CSS variables at the top of the file.
-- `assets/js/main.js`: mobile menu, footer year, Our Work filters, today's hours and the open/closed indicator (computed in Central time), and contact form validation.
-- `assets/images/`: photos plus `favicon.svg`.
+- `index.html` contains the page structure, content sections, and SEO metadata (title, meta description, canonical URL, Open Graph/Twitter tags, and LocalBusiness JSON-LD structured data).
+- `assets/css/styles.css` contains the optimized production CSS used by the page.
+- `assets/js/main.js` handles the mobile menu, current year, field validation, and mailto contact form.
+- `tailwind.config.js` and `src/input.css` are included if you want to rebuild styles with Tailwind.
+- `robots.txt` and `sitemap.xml` support search engine crawling and indexing.
 
-The header, footer, and CTA band are repeated in each HTML file. If you change the phone number, hours, or nav, update all six pages.
+## Before launch — replace the placeholder domain
 
-## Contact form
+The site doesn't have a live domain yet, so `https://brentstowing.prairiewebstudio.com/` is used as a placeholder in four places. Update all of them to the real production URL once it's known:
 
-The estimate form validates input and shows a thank-you message, but **it doesn't send anything yet**. Before launch, connect it to Formspree, Netlify Forms, or your own endpoint in `assets/js/main.js`.
+- `index.html`: `<link rel="canonical">`, `og:url`, `og:image`, `twitter:image`
+- `robots.txt`: `Sitemap:` line
+- `sitemap.xml`: `<loc>`
 
-## Photos
+## SEO notes
 
-All photos are from [Unsplash](https://unsplash.com) and fall under the [Unsplash License](https://unsplash.com/license): free for commercial use, no attribution required. They're stored locally at web sizes. Source IDs (view at `https://unsplash.com/photos/<id>`, or on the CDN at `https://images.unsplash.com/photo-<id>`):
+- **Structured data**: `index.html` includes `AutomotiveBusiness` JSON-LD with phone, email, service area (the same cities listed in the Contact section), 24/7 hours, and the four core services. It intentionally omits a street address since this is a mobile/dispatch-based operation. For the strongest local rankings, also set up and verify a **Google Business Profile** as a service-area business — that has more influence on local pack rankings than on-page markup.
+- **Images**: the files in `assets/images/` are JPEGs (they were previously misnamed with a `.avif` extension, which risked broken rendering if a server serves them with an `image/avif` content type). For better page-speed scores, convert them to WebP or AVIF with an encoder such as [Squoosh](https://squoosh.app) and add `<picture>` fallbacks.
+- **`tire_repair.jpg`**: used on the "Flat Tire Changes & Mobile Repairs" card, but the photo itself shows collision damage to a truck fender, not a tire change. Consider swapping in a photo that matches the service before launch.
+- One image, `rain_tow.jpg`, isn't currently referenced anywhere in `index.html`.
 
-| File                   | Unsplash photo ID              |
-| ---------------------- | ------------------------------ |
-| hero-framer.jpg        | 1646324554833-f0b6a479fa5d     |
-| crew-site-walk.jpg     | 1541888946425-d81bb19240f5     |
-| framing-aerial.jpg     | 1556156653-e5a7c69cc263        |
-| rebar-highrise.jpg     | 1563166423-482a8c14b2d6        |
-| concrete-pour.jpg      | 1574757987642-5755f0839101     |
-| framer-top-plate.jpg   | 1587582423116-ec07293f0395     |
-| carpenter-saw.jpg      | 1589939705384-5185137a7f0f     |
-| steel-scaffold.jpg     | 1593313637552-29c2c0dacd35     |
-| truss-sky.jpg          | 1603439810849-5e013dc3ce73     |
-| rebar-deck.jpg         | 1623489254637-a2dd8375243d     |
-| blueprint-review.jpg   | 1632862378103-8248dccb7e3d     |
-| stair-framing.jpg      | 1656733911006-fcad49fa0d52     |
-| foreman-portrait.jpg   | 1672748341520-6a839e6c05bb     |
-| roof-trusses.jpg       | 1676802037786-3697d60497ae     |
-| truss-gable.jpg        | 1690719095815-549c60090c9f     |
-| two-story-frame.jpg    | 1693639767415-27ff64ce4da2     |
-| column-rebar.jpg       | 1694521787162-5373b598945c     |
-| masonry-check.jpg      | 1694521787193-9293daeddbaa     |
-| block-cutting.jpg      | 1694522362256-6c907336af43     |
-| interior-framing.jpg   | 1704742950992-9815a104820c     |
+## Customize
 
-## Before launch
+Update the company name, phone number, email, service area, project photos, and copy in `index.html`. Keep the title, meta description, JSON-LD, and Open Graph tags in sync with any copy changes.
 
-- Replace the placeholder domain `acme-construction.example` in `sitemap.xml` and the email address in the HTML.
-- Remove `<meta name="robots" content="noindex, nofollow">` from each page and update `robots.txt` (it currently blocks all crawlers).
-- Wire up the contact form (see above).
+The form currently opens the visitor's email app with a prefilled message addressed to `brentstowing@icloud.com`. For production, consider connecting the form to a service such as Formspree, Netlify Forms, or a custom backend endpoint so submissions don't depend on the visitor's device having an email client configured.
 
 ## Preview
 
